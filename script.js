@@ -5,11 +5,11 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-const client = new Paho.MQTT.Client(process.env.GITHUB_SECRET_MQTT_SERVER || process.env.MQTT_SERVER || "fallback_server_address", 8083, "web_" + parseInt(Math.random() * 100, 10));
+const client = new Paho.MQTT.Client(process.env.GITHUB_SECRET_MQTT_SERVER || process.env.MQTT_SERVER || "fallback_server_address", 1883, "web_" + parseInt(Math.random() * 100, 10));
 
 client.onConnectionLost = function (responseObject) {
     if (responseObject.errorCode !== 0) {
-        console.log("Connection lost: " + responseObject.errorMessage);
+        console.error("Connection lost:", responseObject.errorMessage);
     }
 };
 
@@ -23,7 +23,10 @@ const connectOptions = {
         console.log("Connected to MQTT");
         client.subscribe("your/mqtt/topic");
     },
-    useSSL: true,
+    onFailure: function (responseObject) {
+        console.error("Failed to connect:", responseObject.errorMessage);
+    },
+    useSSL: false, // Set to true if your MQTT server uses SSL
     userName: process.env.GITHUB_SECRET_MQTT_USERNAME || process.env.MQTT_USERNAME,
     password: process.env.GITHUB_SECRET_MQTT_PASSWORD || process.env.MQTT_PASSWORD,
 };
