@@ -1,15 +1,14 @@
-const client = new Paho.MQTT.Client(emqx.dhcautomation.ca, 8883, "web_" + parseInt(Math.random() * 100, 10));
+const client = mqtt.connect(emqx.dhcautomation.ca:1883);
 
-client.onConnectionLost = function (responseObject) {
-    if (responseObject.errorCode !== 0) {
-        console.error("Connection lost:", responseObject.errorMessage);
-    }
-};
+client.on('connect', function () {
+    console.log('Connected to MQTT');
+    client.subscribe('your/mqtt/topic');
+});
 
-client.onMessageArrived = function (message) {
-    console.log("Message arrived:", message.payloadString);
-    document.getElementById("mqttData").innerHTML = message.payloadString;
-};
+client.on('message', function (topic, message) {
+    console.log('Message arrived:', message.toString());
+    document.getElementById('mqttData').innerHTML = message.toString();
+});
 
 const connectOptions = {
     onSuccess: function () {
