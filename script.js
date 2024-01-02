@@ -1,7 +1,7 @@
 // script.js
 
-// Load dotenv only if running locally (not in GitHub Actions)
-if (process.env.NODE_ENV !== 'production') {
+// Load dotenv only if running in a Node.js environment
+if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
