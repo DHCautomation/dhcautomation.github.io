@@ -1,6 +1,6 @@
 // script.js
 
-const client = new Paho.MQTT.Client(MQTT_SERVER: ${{ secrets.MQTT_SERVER }}, 8083, "web_" + parseInt(Math.random() * 100, 10));
+const client = new Paho.MQTT.Client( ${{ secrets.MQTT_SERVER }}, 8083, "web_" + parseInt(Math.random() * 100, 10));
 
 client.onConnectionLost = function (responseObject) {
     if (responseObject.errorCode !== 0) {
