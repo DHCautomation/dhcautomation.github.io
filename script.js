@@ -1,4 +1,4 @@
-const client = new Paho.MQTT.Client(process.env.GITHUB_SECRET_MQTT_SERVER || process.env.MQTT_SERVER || "fallback_server_address", 1883, "web_" + parseInt(Math.random() * 100, 10));
+const client = new Paho.MQTT.Client(process.env.GITHUB_SECRET_MQTT_SERVER || process.env.MQTT_SERVER || emqx.dhcautomation.ca, 1883, "web_" + parseInt(Math.random() * 100, 10));
 
 client.onConnectionLost = function (responseObject) {
     if (responseObject.errorCode !== 0) {
