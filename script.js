@@ -1,4 +1,4 @@
-const client = new Paho.MQTT.Client(emqx.dhcautomation.ca, 1883, "web_" + parseInt(Math.random() * 100, 10));
+const client = new Paho.MQTT.Client(emqx.dhcautomation.ca, 8883, "web_" + parseInt(Math.random() * 100, 10));
 
 client.onConnectionLost = function (responseObject) {
     if (responseObject.errorCode !== 0) {
