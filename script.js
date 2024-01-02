@@ -1,4 +1,4 @@
-const client = mqtt.connect(mqtt://emqx.dhcautomation.ca:1883);
+const client = mqtt.connect(tcp://emqx.dhcautomation.ca:1883);
 
 client.on('connect', function () {
     console.log('Connected to MQTT');
