@@ -1,6 +1,6 @@
 // script.js
 
-const client = new Paho.MQTT.Client("YOUR_SERVER_ADDRESS", 8083, "web_" + parseInt(Math.random() * 100, 10));
+const client = new Paho.MQTT.Client(MQTT_SERVER: ${{ secrets.MQTT_SERVER }}, 8083, "web_" + parseInt(Math.random() * 100, 10));
 
 client.onConnectionLost = function (responseObject) {
     if (responseObject.errorCode !== 0) {
@@ -19,8 +19,8 @@ const connectOptions = {
         client.subscribe("your/mqtt/topic");
     },
     useSSL: true,
-    userName: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
+    userName: MQTT_USERNAME: ${{ secrets.MQTT_USERNAME }},
+    password: MQTT_PASSWORD: ${{ secrets.MQTT_PASSWORD }},
 };
 
 client.connect(connectOptions);
